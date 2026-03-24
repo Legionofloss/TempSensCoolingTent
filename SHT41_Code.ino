@@ -14,17 +14,23 @@ static const int SD_CS_PIN = 10;        //Select pin for MicroSD module
 void setup( )
 {
   Serial.begin( 9600 );
-  //Wire.begin();
+  pinMode(LED_BUILTIN, OUTPUT);
 
 
   // Initialize the SHT41 sensor 
   if (!sht4.begin())
   {
     Serial.println("Sensor initialization failed!");
+    digitalWrite(LED_BUILTIN, HIGH); //Tell without serial monitor that sensor initialization failed
+    delay(500);
+    digitalWrite(LED_BUILTIN,LOW);
+    delay(500);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(500);
+    digitalWrite(LED_BUILTIN, LOW);
     while (1) delay (1);
   }
   Serial.println("Found temp sensor");
-  Serial.print(sht4.readSerial(), HEX);
   sht4.setPrecision(SHT4X_HIGH_PRECISION);
   sht4.setHeater(SHT4X_NO_HEATER);
 
@@ -35,6 +41,22 @@ void setup( )
   if ( !SD.begin( SD_CS_PIN ) )
   {
     Serial.println("SD card initialization failed!"); 
+    digitalWrite(LED_BUILTIN, HIGH); //Tell without serial monitor that SD initialization failed
+    delay(200);
+    digitalWrite(LED_BUILTIN,LOW);
+    delay(200);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(200);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(200);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(200);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(200);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(200);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(1000);
     return;
   }
   Serial.println("SD card initialized.");
