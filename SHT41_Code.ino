@@ -78,7 +78,7 @@ static bool measure_environment( float *temperature, float *humidity )
   static unsigned long measurement_timestamp = millis( );
 
   
-  if( millis( ) - measurement_timestamp > 3000ul ) //meaasurement time - rn it's every 4 seconds -> will be modified for final code
+  if( millis( ) - measurement_timestamp > 3000ul ) //measurement time - rn it's every 3 seconds
   {
    sensors_event_t hum_event, temp_event;
    sht4.getEvent(&hum_event, &temp_event);
