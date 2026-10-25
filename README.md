@@ -66,7 +66,7 @@ The unit ran at low fan speed until a refuel stop at ~14:40 and at high fan spee
 ## Learnings
 
 1. **Airflow mattered almost to the same degree as cooling capacity.** The same A/C unit produced a much larger temperature reduction on high fan speed than on low.
-2. **Cooling has to be continuous.** The unplanned fan outage on Day 2 and the generator shutdown during the Day 3 refuel both caused immediate temperature spikes, due to the poor insulation of the shelter. The deployable, inflatable tent suffers from similar insulation issues, so these results match what would happen in practice. This shows that power continuity is required. 
+2. **Cooling has to be continuous.** The unplanned fan outage on Test 1 and the generator shutdown during the Test 3 refuel both caused immediate temperature spikes, due to the poor insulation of the shelter. The deployable, inflatable tent suffers from similar insulation issues, so these results match what would happen in practice. This shows that power continuity is required. 
 
 ---
 
