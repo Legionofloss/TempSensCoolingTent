@@ -17,8 +17,8 @@ One logger sat inside the shelter and one outside (under shade), recording tempe
 
 | Test day | Cooling | Result (inside vs. outside, wet-bulb) |
 |---|---|---|
-| 1 | None (control) | Inside peaked at ≈24.8 °C, ≈3 °C above outside. Dry-bulb ran ≈7 °C hotter inside. |
-| 2 | 2 fans at wall vents | Inside held within ≈0.5 °C of outside until a power failure at ~11:00, then climbed ≈2 °C above. |
+| 1 | 2 fans at wall vents | Inside held within ≈0.5 °C of outside until a power failure at ~11:00, then climbed ≈2 °C above. |
+| 2 | None (control) | Inside peaked at ≈24.8 °C, ≈3 °C above outside. Dry-bulb ran ≈7 °C hotter inside. |
 | 3 | 6,000 BTU portable A/C + gas generator | Inside never exceeded ≈22.8 °C, under the 25 °C safety limit all day. Switching to high fan speed widened the gap to ≈2–3 °C below outside. |
 
 **Pass criteria:** inside wet-bulb temperature ≤ 25 °C, and a consistent reduction relative to outside. The A/C configuration, which matches the final design, met both.
@@ -34,7 +34,7 @@ One logger sat inside the shelter and one outside (under shade), recording tempe
 - **Shelter:** 188 sq ft humanitarian shelter at the Brackenridge Field Lab. Cooling scales by ~7× from this test to the full design, while floor area scales by ~5×, so the test is conservative.
 - **Instrumentation:** two identical loggers, one inside the shelter and one outside.
 - **Schedule:** three test days with similar forecast conditions (mostly cloudy, high near 31 °C), one cooling method per day.
-- **Wet-bulb temperature:** computed in post-processing from logged temperature and relative humidity. Wet-bulb accounts for the effects of humidity on the body's abiity to cool itself.
+- **Wet-bulb temperature:** computed in post-processing from logged temperature and relative humidity. Wet-bulb accounts for the effects of humidity on the body's ability to cool itself.
 <!-- TODO: name the wet-bulb formula you used (e.g., Stull 2011) and how the inside/outside logs were time-aligned. -->
 
 <!-- TODO: upload fig05a_fans_mounted_at_vents.jpg and fig05b_fan_mount_closeup.jpg to Images/, then delete these comment markers to show them.
@@ -45,20 +45,19 @@ One logger sat inside the shelter and one outside (under shade), recording tempe
 </p>
 <p align="center"><em>Fan mounts: 3D-printed brackets and laser-cut plywood shelves, fixed to the wall using the shelter's original fasteners.</em></p>
 -->
-
-### Day 1: No cooling (control)
-
-<p align="center"><img src="Images/fig08_wetbulb_no_cooling.png" alt="Wet-bulb temperature vs. time, no cooling" width="80%"></p>
-
-With minimal ventilation, the closed shelter acts as a heat trap. This result is the baseline the other two days are compared to.
-
-### Day 2: Fans
+### Test 1: Fans
 
 <p align="center"><img src="Images/fig09_wetbulb_fans.png" alt="Wet-bulb temperature vs. time, fans" width="80%"></p>
 
 Two Vornado fans pulling air through the wall vents kept the inside matched to outside conditions until the battery supply failed. When the fans' battery supply failed at ~11:00, the inside dry-bulb temperature rose ≈5 °C in about 15 minutes.
 
-### Day 3: Rented A/C
+### Test 2: No cooling (control)
+
+<p align="center"><img src="Images/fig08_wetbulb_no_cooling.png" alt="Wet-bulb temperature vs. time, no cooling" width="80%"></p>
+
+With minimal ventilation, the closed shelter acts as a heat trap. This result is the baseline the other two days are compared to.
+
+### Test 3: Rented A/C
 
 The unit ran at low fan speed until a refuel stop at ~14:40 and at high fan speed afterward. The inside-outside gap widened noticeably after the switch, as seen in the chart under *Results at a glance*.
 
@@ -67,7 +66,7 @@ The unit ran at low fan speed until a refuel stop at ~14:40 and at high fan spee
 ## Learnings
 
 1. **Airflow mattered almost to the same degree as cooling capacity.** The same A/C unit produced a much larger temperature reduction on high fan speed than on low.
-2. **Cooling has to be continuous.** The unplanned fan outage on Day 2 and the generator shutdown during the Day 3 refuel both caused immediate temperature spikes, due to the poor insulation of the shelter (which is similar to the "real" shelter). Power continuity is required. 
+2. **Cooling has to be continuous.** The unplanned fan outage on Day 2 and the generator shutdown during the Day 3 refuel both caused immediate temperature spikes, due to the poor insulation of the shelter. The deployable, inflatable tent suffers from similar insulation issues, so these results match what would happen in practice. This shows that power continuity is required. 
 
 ---
 
@@ -111,7 +110,7 @@ The editable KiCad schematic is in `Temperature Sensor.kicad_sch`.
 1. Install the **Adafruit SHT4x** library from the Arduino Library Manager. `SD` and `SPI` come with the Arduino IDE.
 2. Flash `SHT41_Code.ino` to the Nano.
 3. Insert a FAT32-formatted microSD card and turn on.
-4. Optionally, confirm readings in the Serial Monitor.
+4. Optionally, confirm readings in the Serial Monitor (9600 baud).
 
 ---
 
@@ -119,7 +118,7 @@ The editable KiCad schematic is in `Temperature Sensor.kicad_sch`.
 
 - **No wall-clock time.** Timestamps are milliseconds since power-on, so aligning the inside and outside logs depends on starting both loggers together. This could be fixed by adding a real-time clock to each logger.
 - **Silent data loss on SD failure.** If the SD card fails at startup, the loop keeps sampling without saving anything. Fixes: halt or retry, and keep a persistent fault LED on.
-- **Full-scale validation.** The next step for the project would be testing the full design: inflatable tent, commercial A/C, and diesel generator. (This was prohibitively expensive for a student project unfortunately) 
+- **Full-scale validation.** The next step for the project would be testing the full design: inflatable tent, commercial A/C, and diesel generator. (Testing the full design was prohibitively expensive for a student project) 
 
 ---
 
@@ -130,7 +129,7 @@ The editable KiCad schematic is in `Temperature Sensor.kicad_sch`.
 | `SHT41_Code.ino` | Field firmware (current) |
 | `Temperature Sensor.kicad_sch`, `.kicad_pro` | KiCad schematic and project |
 | `Images/` | Photos and result plots |
-| `Data/` | Contains raw and modified Csv data from the temperature sensors
+| `Data/` | Contains raw and processed CSV data from the temperature sensors
 | `Sensorode.ino` | Earlier prototype using a DHT11 sensor, adapted from an Elegoo tutorial |
 | `dht_nonblocking.*`, `keywords.txt`, `library.properties` | Bundled [DHT_nonblocking](https://github.com/olewolf/DHT_nonblocking) library by Ole Wolf (GPL-3.0), used only by the DHT11 prototype |
 
